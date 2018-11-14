@@ -54,12 +54,12 @@
   function keydown(e){
       if(e.keyCode === 13){
         var obj = document.activeElement;
-        //console.log(obj); リセットボタンが消失することが原因でエラーを吐いている気がする。現段階では操作上問題はないのでそのまま。
+        console.log(obj);
         obj.nextElementSibling.focus();
       }
     }
     
-  window.onkeydown = keydown;
+  guessField.onkeydown = keydown;
 
   var guessCount = 1;
   var resetButton;
