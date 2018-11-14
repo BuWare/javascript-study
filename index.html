@@ -84,9 +84,9 @@
       lastResult.textContent = '違うよ!';
       lastResult.style.backgroundColor = 'red';
       if(userGuess < randomNumber) {
-        lowOrHi.textContent = 'もっと大きいよ!';
+        lowOrHi.textContent = '小さすぎる!';
       } else if(userGuess > randomNumber) {
-        lowOrHi.textContent = 'もっと小さいよ!';
+        lowOrHi.textContent = '大きすぎる!';
       }
       guessField.focus();
     }
