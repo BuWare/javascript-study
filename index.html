@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Number guessing</title>
 
     <style>
@@ -11,14 +11,34 @@
       }
       body {
         width: 50%;
-        max-width: 800px;
-        min-width: 480px;
+        max-width: 100%;
+        min-width: 80%;
         margin: 0 auto;
+        background-color: whitesmoke;
       }
       .lastResult {
         color: white;
         padding: 3px;
       }
+      .guessSubmit {
+          display: inline-block;
+          max-width: 180px;
+          text-align: left;
+          background-color: #ffa300;
+          font-size: 14px;
+          color: #FFF;
+          text-decoration: none;
+          font-weight: bold;
+          padding: 1px 6px;
+          border-radius: 4px;
+          border-bottom: 4px solid #d37800;
+        }
+
+        .btn-push:active {
+            transform: translateY(4px);
+            -webkit-transform: translateY(4px);
+            border-bottom: none;
+        }
     </style>
   </head>
 
@@ -28,7 +48,7 @@
       <p>1~100の間の数がランダムで設定されています。<br>数を入力すると設定された値より小さいか大きいかを答えます。<br>10回以内に当ててください。</p>
 
 <div class="form">
-  <label for="guessField">入力してEnterでもOKです。: </label><input type="text" id="guessField" class="guessField">
+  <label for="guessField">入力してEnterでもOKです。: </label><input type="text" id="guessField" class="guessField" pattern='[0-9]*'>
   <input type="submit" value="回答する" class="guessSubmit">
 </div>
 
