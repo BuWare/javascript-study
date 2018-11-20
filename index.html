@@ -3,43 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script type="text/javascript" language="JavaScript" src="js/main.js"></script>
     <title>Number guessing</title>
 
-    <style>
-      html {
-        font-family: sans-serif;
-      }
-      body {
-        width: 50%;
-        max-width: 100%;
-        min-width: 80%;
-        margin: 0 auto;
-        background-color: whitesmoke;
-      }
-      .lastResult {
-        color: white;
-        padding: 3px;
-      }
-      .guessSubmit {
-          display: inline-block;
-          max-width: 180px;
-          text-align: left;
-          background-color: #ffa300;
-          font-size: 14px;
-          color: #FFF;
-          text-decoration: none;
-          font-weight: bold;
-          padding: 1px 6px;
-          border-radius: 4px;
-          border-bottom: 4px solid #d37800;
-        }
-
-        .btn-push:active {
-            transform: translateY(4px);
-            -webkit-transform: translateY(4px);
-            border-bottom: none;
-        }
-    </style>
   </head>
 
   <body>
@@ -48,7 +15,7 @@
       <p>1~100の間の数がランダムで設定されています。<br>数を入力すると設定された値より小さいか大きいかを答えます。<br>10回以内に当ててください。</p>
 
 <div class="form">
-  <label for="guessField">入力してEnterでもOKです。: </label><input type="text" id="guessField" class="guessField" pattern='[0-9]*'>
+  <label for="guessField">入力してEnterでもOKです。: </label><input type="text" id="guessField" class="guessField" pattern='[0-9]*' maxlength="3">
   <input type="submit" value="回答する" class="guessSubmit">
 </div>
 
@@ -60,90 +27,4 @@
 
 </body>
 
-<script>
-  
-  var randomNumber = Math.floor(Math.random()*100)+1;
-  var guesses = document.querySelector('.guesses');
-  var lastResult = document.querySelector('.lastResult');
-  var lowOrHi = document.querySelector('.lowOrHi');
-
-  var guessSubmit = document.querySelector('.guessSubmit');
-  var guessField = document.querySelector('.guessField');
-	guessField.focus();
-	
-  function keydown(e){
-      if(e.keyCode === 13){
-        var obj = document.activeElement;
-        console.log(obj);
-        obj.nextElementSibling.focus();
-      }
-    }
-    
-  guessField.onkeydown = keydown;
-
-  var guessCount = 1;
-  var resetButton;
-
-  function checkGuess() {
- 
-    var userGuess = Number(guessField.value);
-    if(guessCount === 1) {
-      guesses.textContent = '推測した値: ';
-    }
-    guesses.textContent += userGuess + ' ';
- 
-    if(userGuess === randomNumber) {
-      lastResult.textContent = 'Congratulations! 正解です!';
-      lastResult.style.backgroundColor = 'green';
-      lowOrHi.textContent = '';
-      setGameOver();
-    } else if(guessCount === 10) {
-      lastResult.textContent = '!!!GAME OVER!!!';
-      setGameOver();
-    } else {
-      lastResult.textContent = '違うよ!';
-      lastResult.style.backgroundColor = 'red';
-      if(userGuess < randomNumber) {
-        lowOrHi.textContent = '小さすぎる!';
-      } else if(userGuess > randomNumber) {
-        lowOrHi.textContent = '大きすぎる!';
-      }
-      guessField.focus();
-    }
- 
-    guessCount++;
-    guessField.value = '';
-  }
-  guessSubmit.addEventListener('click', checkGuess);
-  
-  function setGameOver() {
-	  guessField.disabled = true;
-	  guessSubmit.disabled = true;
-	  resetButton = document.createElement('button');
-	  resetButton.textContent = 'もう一回やる？';
-	  document.body.appendChild(resetButton);
-	  resetButton.addEventListener('click', resetGame);
-    resetButton.focus();
-  }
-  
-  function resetGame() {
-	  guessCount = 1;
-	
-	  var resetParas = document.querySelectorAll('.resultParas p');
-	  for(var i = 0; i < resetParas.length; i++) {
-		  resetParas[i].textContent = '';
-	  }
-	  resetButton.parentNode.removeChild(resetButton);
-	
-	  guessField.disabled = false;
-	  guessSubmit.disabled = false;
-	  guessField.value = '';
-	  guessField.focus();
-	
-	  lastResult.style.backgroundColor = 'white';
-	
-	  randomNumber = Math.floor(Math.random()*100)+1;
-	  console.log(randomNumber);
-  }
-</script>
 </html>
